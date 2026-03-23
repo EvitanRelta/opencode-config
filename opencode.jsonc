@@ -1,0 +1,13 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "plugin": ["@tarquinen/opencode-dcp@latest"],
+    "permission": {
+        "question": "deny", // It's useless
+        "lsp": "allow", // Requires OPENCODE_EXPERIMENTAL_LSP_TOOL=true
+        "websearch": "allow", // Requires OPENCODE_ENABLE_EXA=1
+    },
+    "agent": {
+        "general": { "model": "opencode-go/minimax-m2.7" },
+        "explore": { "model": "opencode-go/minimax-m2.7" },
+    },
+}
