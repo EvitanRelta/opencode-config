@@ -2,3 +2,8 @@ node_modules
 package.json
 bun.lock
 .gitignore
+
+temp
+*.temp
+temp.*
+*.temp.*
