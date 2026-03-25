@@ -15,6 +15,7 @@ tools:
     todoread: false
     webfetch: false
     websearch: false
+    codesearch: false
     question: false
 ---
 
