@@ -4,6 +4,8 @@ mode: primary
 tools:
     read: true
     task: true
+    todowrite: true
+    todoread: true
 
     bash: false
     edit: false
@@ -11,8 +13,6 @@ tools:
     glob: false
     list: false
     skill: false
-    todowrite: false
-    todoread: false
     webfetch: false
     websearch: false
     codesearch: false
