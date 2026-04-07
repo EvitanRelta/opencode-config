@@ -9,8 +9,7 @@ description: |-
     - @relative/path/to/file2.ext
 model: opencode/gemini-3.1-pro
 reasoningEffort: medium
-# model: opencode-go/minimax-m2.7
-mode: subagent
+mode: all
 tools:
     read: false
     task: false
