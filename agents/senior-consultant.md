@@ -1,5 +1,12 @@
 ---
-description: The agent you call to solve hard/complex problems. Has no access to tools and can't search/read files themselves, so give them all the relevant information they need to solve the problem. If you need to give them whole files, DO NOT manually copy the contents. Instead, just prepend the path to file with "@" (e.g. @relative/path/to/file.ext with no `code` ticks or any other formatting) in your prompt to them, and the file contents will automatically be given.
+description: |-
+    The agent you call to solve hard/complex problems. Has no access to tools and can't search/read files themselves, so give them all the relevant information they need to solve the problem.
+
+    If you need to give them WHOLE files, DO NOT manually copy the contents. Instead, give them a markdown list of relative paths prefixed with @ in the below format, and each of those files' contents will automatically be given to them:
+
+    # Relevant files
+    - @relative/path/to/file1.ext
+    - @relative/path/to/file2.ext
 model: opencode/gemini-3.1-pro
 reasoningEffort: medium
 # model: opencode-go/minimax-m2.7
