@@ -17,7 +17,7 @@
     // Manual mode: disables autonomous context management,
     // tools only run when explicitly triggered via /dcp commands
     "manualMode": {
-        "enabled": false,
+        "enabled": true,
         // When true, automatic cleanup (deduplication, purgeErrors)
         // still runs even in manual mode
         "automaticStrategies": true,
