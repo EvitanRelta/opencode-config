@@ -7,7 +7,7 @@
         "websearch": "allow", // Requires OPENCODE_ENABLE_EXA=1
     },
     "agent": {
-        "general": { "model": "opencode-go/minimax-m2.7" },
-        "explore": { "model": "opencode-go/minimax-m2.7" },
+        "general": { "model": "opencode-go/glm-5.1" },
+        "explore": { "model": "opencode-go/glm-5.1" },
     },
 }
