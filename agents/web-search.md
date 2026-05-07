@@ -1,6 +1,6 @@
 ---
 description: Searches the web with parallel subagents
-model: opencode-go/kimi-k2.6  # K2.5 works but K2.6 is on x3 limits now
+model: opencode-go/kimi-k2.5
 mode: primary
 tools:
     task: true
