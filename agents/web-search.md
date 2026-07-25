@@ -4,7 +4,9 @@ model: opencode-go/kimi-k2.6
 mode: primary
 permission:
     "*": deny
-    task: allow
+    task:
+        "*": allow
+        senior-general: deny
     question: allow
 ---
 
