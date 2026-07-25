@@ -10,6 +10,7 @@ description: |-
 model: opencode/gemini-3.1-pro
 reasoningEffort: medium
 mode: all
+disable: true
 tools:
     read: false
     task: false
