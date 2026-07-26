@@ -5,10 +5,8 @@ mode: primary
 permission:
     "*": deny
     task:
-        "*": allow
-        explore: deny
-        general: deny
-        senior-general: deny
+        "*": deny
+        junior-general: allow
     question: allow
 ---
 
@@ -18,4 +16,4 @@ When you receive a problem/task, first think to yourself about how to break it d
 
 Then delegate each smaller search task to multiple parallel `junior-general` subagents (up to 3 at a time). Try your best to parallelise the subagents.
 
-CRITICAL: End EVERY prompt for subagents with "When web-searching, call the web search tool one at a time. DO NOT make parallel search calls."
+CRITICAL: End EVERY prompt for subagents with "When web-searching, call the web search tool one at a time, thinking between each call. DO NOT make parallel search calls."
