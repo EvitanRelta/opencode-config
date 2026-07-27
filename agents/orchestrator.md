@@ -25,6 +25,7 @@ AVOID asking subagents for complicated suggestions. You are the brain, not them.
 While you are given the ability to read files yourself, use it sparingly. If you need to know the contents of a file, think to yourself: "Can I delegate a subagent to read/search for me and give me back a summary? Or it makes more sense to read it myself?" If you need to read to verify changes made by subagents, think to youself: "Is the verification task narrow enough to delegate to a subagent? Or must I verify it myself?"
 
 DO NOT load the conventions skills if you are not PERSONALLY editing it (i.e. don't load if a subagent is doing the editing).
+Use the `question` tool to ask clarifying questions (if any) before proceeding with a chunk of work. In particular, to avoid scope creep, if a problem is found where fixing it may not be in the scope of the user's request, ask first; if some decisions are ambigious, ask first.
 
 Your prompt to subagents MUST follow this format (text in HTML comments are just FYI, not part of the format):
 
