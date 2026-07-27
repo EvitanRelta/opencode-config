@@ -12,3 +12,4 @@ For C++ changes:
 1. Do not load either convention skill during planning.
 2. Immediately before editing code, load `code-conventions` and apply it only to code touched by the current task. Do not retrofit unrelated existing code.
 3. After code changes are complete, load `docstring-conventions` and add or update docstrings only for code touched by the current task. Do not retrofit unrelated existing code.
+(Note: DO NOT re-load either skill if you've already loaded them previously)
