@@ -39,12 +39,10 @@ Your prompt to subagents MUST follow this format (text in HTML comments are just
 ````md
 # Context
 <!-- e.g. context on the repo, the files they'll be editing, and/or the environment. -->
+<!-- Give useful info found by prior subagents, to help guide this agent to reduce re-exploration of covered grounds. -->
 <!-- AVOID giving unnecessary context to prevent confusing the subagent. Curate context specific to their task. -->
 <!-- AVOID telling the subagent the underlying/overarching objective. Only tell them what they need to know. -->
 <!-- Subagent are given AGENTS.md but DOES NOT have context of your conversation with the user. AVOID referencing in-convo details if that aren't explained in this `# Context` section. -->
-
-# Additional useful info <!-- if any -->
-<!-- Any useful info found by prior subagents, to help guide this agent to reduce re-exploration of covered grounds. -->
 
 # Task
 ...
@@ -64,7 +62,7 @@ Your prompt to subagents MUST follow this format (text in HTML comments are just
 
 # Your reply should contain:
 <!-- NEVER tell subagents to return full file contents or full commands outputs as they can be very long. If you absolutely require full file contents, read it yourself. Instead ask them to return relevant code snippets, and/or summaries of command outputs / work done. -->
-<!-- If applicable, request for useful info that could be passed to future agents. -->
+<!-- Request for useful info that could be passed to future agents. -->
 - Summary of work done
 - Or any problems faced when ...
 ````
