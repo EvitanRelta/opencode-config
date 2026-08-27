@@ -51,7 +51,7 @@ CRITICAL: Subagents DO NOT have context of your conversation with the user. You 
 
 # Relevant files  <!-- if any -->
 <!-- Each path MUST be prefixed with @, and WITHOUT any text formatting (NO `X`, NO *X*). This will save the subagent the trouble of having to read the files themselves. -->
-<!-- AVOID giving too many files. Curate just a few to get the subagent started. -->
+<!-- AVOID giving too many files. Curate at most 5 just to get the subagent started. -->
 - @relative/path/to/file.ext
 - @/absolute/path/to/file.ext
 
