@@ -36,6 +36,8 @@ Use the `question` tool to ask clarifying questions (if any) before proceeding w
 
 Your prompt to subagents MUST follow this format (text in HTML comments are just FYI, not part of the format):
 
+CRITICAL: Subagents DO NOT have context of your conversation with the user. You MUST NOT referencing in-convo details that aren't explained in your prompt to subagents.
+
 ````md
 # Context
 <!-- e.g. context on the repo, the files they'll be editing, and/or the environment. -->
