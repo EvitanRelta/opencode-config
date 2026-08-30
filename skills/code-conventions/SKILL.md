@@ -5,7 +5,10 @@ description: C++ code conventions. Load this skill ONLY when you're about to edi
 
 # Naming conventions
 
-Read `.clang-tidy` lines 26–51 (26 total lines) for naming conventions.
+- Types & Templates (`CamelCase`): Classes, structs, enums, type aliases, template parameters. (e.g. `using NodeList = ...;`, `template <typename KeyType>`)
+- Constants (`UPPER_CASE`): `constexpr`, static/global `const`, enum values.
+- General (`lower_case`): Namespaces, functions, parameters, local variables (including local `const`), public members. (e.g. `struct Point { int x_pos; };`)
+- Private Members (`m_lower_case`): Private member variables.
 
 # No braces for single-line statements
 
