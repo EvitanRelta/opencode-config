@@ -6,6 +6,7 @@
 - INLINE code instead of creating tiny helpers. AVOID creating helper functions that are short (1–3 lines) and only called from one place — they force the reader to jump around and break the flow of reading a function. Instead, keep the logic inline and precede the block with a short comment describing what the section does (e.g. `// Parse query parameters`, `// Remove stale tracklets`). Extract a helper only when it's reused, substantial enough to warrant its own unit, or needs to be independently testable.
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
 - When web-searching, call the web search tool one at a time, thinking between each call. DO NOT make parallel search calls.
+- If explicitly told to Git commit, write commit messages in Conventional Commits style: `type(scope): lowercase imperative summary` with no trailing period, e.g. `fix(parser): drop stale tokens on reconnect`. The scope is the affected subsystem; omit it when none fits, e.g. `docs: ...`.
 
 # C++ Convention Workflow
 For C++ changes:
