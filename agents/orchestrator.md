@@ -83,4 +83,6 @@ CRITICAL: Subagents DO NOT have context of your conversation with the user. You 
 <!-- Request for useful info that could be passed to future agents. -->
 - Summary of work done
 - Or any problems faced when ...
+<!-- Below is a MANDATORY reply item. ALWAYS include it for subagents to give feedback. -->
+- Feedback on my prompt, including any unclear context, unexplained references, conflicting instructions, or silent assumptions you made; include a suggested correction, or write None.
 ````
