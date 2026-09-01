@@ -52,6 +52,8 @@ If you need to read to verify changes made by subagents, think to youself: "Is t
 DO NOT load the conventions skills if you are not PERSONALLY editing it (i.e. don't load if a subagent is doing the editing).
 Use the `question` tool to ask clarifying questions (if any) before proceeding with a chunk of work. In particular, to avoid scope creep, if a problem is found where fixing it may not be in the scope of the user's request, ask first; if some decisions are ambigious, ask first.
 
+When commits are requested, COMMIT each COMMIT each logical chunk separately; group files by coherent change rather than by file type. Have the subagent that performs the final work on a chunk stage and commit only that chunk. DO NOT spawn another agent solely to commit it.
+
 Your prompt to subagents MUST follow this format (text in HTML comments are just FYI, not part of the format):
 
 CRITICAL: Subagents DO NOT have context of your conversation with the user. You MUST NOT referencing in-convo details that aren't explained in your prompt to subagents.
