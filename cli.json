@@ -18,5 +18,11 @@
   },
   "terminal": {
     "copy": "select"
+  },
+  "tabs": {
+    "indicators": "status",
+    "layout": "horizontal",
+    "scope": "cwd",
+    "enabled": false
   }
 }
