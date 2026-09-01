@@ -1,6 +1,6 @@
 - When editing code, preserve existing comments in the file if they're still relevant.
 - Before reading a file, use grep/glob to locate the relevant lines, then call read with offset/limit to fetch only that range. Default to ≤200 lines per read. Only omit offset/limit when you genuinely need the whole file.
-- DO NOT rely on Git to view staged/unstaged changes.
+- DO NOT rely on Git to inspect changes unless commits are requested. When committing, MAY use git status and git diff to verify scope, staging, and commit boundaries.
 - When running commands, use head/tail to truncate the output unless you need the full output.
 - When running multiple commands, chain them into 1 command using &&, || or ; (and with head/tail).
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
@@ -9,6 +9,7 @@
 
 # Implementation Style
 - PREFER direct, readable code over helper-heavy abstractions and result wrappers. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
+- PREFER direct, readable code and the fewest interfaces and classes needed to keep responsibilities clear. DO NOT introduce helper-heavy abstractions, result wrappers, adapters, or interface hierarchies without a demonstrated practical benefit. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
 - INLINE short, one-use logic instead of creating tiny 1–3 lines helpers; introduce the block with a brief descriptive comment. Extract only for meaningful reuse, substantial logic, cleanup, safety, or independent testing.
 - PREFER familiar standard C++ where practical. USE platform-specific mechanisms when required for correctness or safe failure handling; DO NOT trade safety for superficial simplicity.
 

@@ -50,13 +50,14 @@ DELEGATE edits to subagents by default. Edit files yourself only when clearly si
 Review subagent work only when it is correctness-sensitive, difficult to reverse, or the agent reports uncertainty. Keep reviews narrow and delegate them where practical; otherwise trust the subagent and DO NOT add redundant review.
 
 DO NOT load the conventions skills if you are not PERSONALLY editing it (i.e. don't load if a subagent is doing the editing).
+
 Use the `question` tool to ask clarifying questions (if any) before proceeding with a chunk of work. In particular, to avoid scope creep, if a problem is found where fixing it may not be in the scope of the user's request, ask first; if some decisions are ambigious, ask first.
 
 When commits are requested, COMMIT each COMMIT each logical chunk separately; group files by coherent change rather than by file type. Have the subagent that performs the final work on a chunk stage and commit only that chunk. DO NOT spawn another agent solely to commit it.
 
-Your prompt to subagents MUST follow this format (text in HTML comments are just FYI, not part of the format):
+Prompts starting a new subagent session MUST follow the below format (HTML comments are just FYI, not part of the format). Continuation prompts to the same session MAY be concise and SHOULD NOT repeat context or instructions already established.
 
-CRITICAL: Subagents DO NOT have context of your conversation with the user. You MUST NOT referencing in-convo details that aren't explained in your prompt to subagents.
+CRITICAL: Subagents DO NOT have context of your conversation with the user. Subagent prompts MUST be self-contained and task-only. DO NOT mention user approval, prior discussion, or phrases such as "agreed design".
 
 ````md
 # Context
@@ -76,7 +77,7 @@ CRITICAL: Subagents DO NOT have context of your conversation with the user. You 
 - @/absolute/path/to/file.ext
 
 # DO NOTs
-<!-- List of actions to not do. -->
+<!-- List of actions to not do. Examples: -->
 - DO NOT compile the code
 - DO NOT try to debug, instead tell me any problems faced regarding ...
 - DO NOT read path/to/irrelevant/file.ext
