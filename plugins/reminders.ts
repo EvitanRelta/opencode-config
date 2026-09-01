@@ -1,4 +1,6 @@
-import type { Plugin } from "@opencode-ai/plugin"
+import { Message } from "@opencode-ai/ai"
+import { Plugin } from "@opencode-ai/plugin"
+import type { SessionMessageInfo } from "@opencode-ai/client"
 import { createHash } from "node:crypto"
 import { readdir, readFile } from "node:fs/promises"
 import os from "node:os"
@@ -14,7 +16,9 @@ type Reminder = {
   identity: string
 }
 
-const remindersPlugin: Plugin = async ({ client, directory }) => {
+export default Plugin.define({
+  id: "reminders",
+  async setup(ctx) {
   let configDirectory: string
   if (process.env.OPENCODE_CONFIG_DIR) {
     configDirectory = path.resolve(process.env.OPENCODE_CONFIG_DIR)
@@ -103,7 +107,6 @@ const remindersPlugin: Plugin = async ({ client, directory }) => {
       .update(
         JSON.stringify({
           filename,
-          description: fields.description,
           agents: agents ? [...agents].sort() : null,
           frequency,
           body,
@@ -113,298 +116,98 @@ const remindersPlugin: Plugin = async ({ client, directory }) => {
     reminders.push({ filename, body, agents, frequency, identity })
   }
 
-  return {
-    "experimental.chat.messages.transform": async (_input, output) => {
-      if (reminders.length === 0 || output.messages.length === 0) return
+    await ctx.session.hook("context", async (event) => {
+      if (reminders.length === 0 || event.messages.length === 0) return
 
-      // Match MessageV2.latest(): compacted model history is not necessarily in chronological array order.
-      let activeUser: Extract<(typeof output.messages)[number]["info"], { role: "user" }> | undefined
-      for (const message of output.messages) {
-        if (message.info.role !== "user") continue
-        if (
-          !activeUser ||
-          message.info.time.created > activeUser.time.created ||
-          (message.info.time.created === activeUser.time.created && message.info.id > activeUser.id)
-        ) {
-          activeUser = message.info
-        }
-      }
-      if (!activeUser) return
+      const history: SessionMessageInfo[] = await ctx.session.context({ sessionID: event.sessionID })
+      const firstSwitch = history.find(
+        (entry): entry is Extract<SessionMessageInfo, { type: "agent-switched" }> =>
+          entry.type === "agent-switched",
+      )
+      let activeAgent = firstSwitch?.previous ?? event.agent
+      const activityCounts = new Map<string, number>()
+      const deliveries: {
+        boundaryID: string
+        boundaryKind: "user" | "assistant"
+        reminders: { reminder: Reminder; ordinal: number; activityAgent: string }[]
+      }[] = []
 
-      const sessionID = activeUser.sessionID
-      const snapshotIDs = new Set(output.messages.map((message) => message.info.id))
-
-      const response = await client.session.messages({
-        path: { id: sessionID },
-        query: { directory },
-        throwOnError: true,
-      })
-      const history = response.data
-
-      // Overflow compaction may replay the original prompt without a synthetic marker.
-      const replayUsers = new Set<string>()
-      for (let index = 1; index < history.length; index++) {
-        const message = history[index]
-        const previous = history[index - 1]
-        if (message.info.role !== "user" || previous.info.role !== "assistant" || previous.info.summary !== true) {
+      for (const boundary of history) {
+        if (boundary.type === "agent-switched") {
+          activeAgent = boundary.agent
           continue
         }
-        const compaction = history.find((candidate) => candidate.info.id === previous.info.parentID)
-        if (
-          compaction?.info.role === "user" &&
-          compaction.parts.some(
-            (part) => part.type === "compaction" && "overflow" in part && part.overflow === true,
-          )
-        ) {
-          replayUsers.add(message.info.id)
-        }
-      }
 
-      const parentIndex = history.findIndex((message) => message.info.id === activeUser.id)
-      if (parentIndex < 0) return
-      const parent = history[parentIndex]
-      if (
-        parent.info.role !== "user" ||
-        replayUsers.has(parent.info.id) ||
-        parent.parts.some((part) => part.type === "compaction") ||
-        !parent.parts.some((part) => !("synthetic" in part && part.synthetic === true))
-      ) {
-        return
-      }
-
-      // Normal inference persists a new assistant after taking the hook snapshot; compaction does not.
-      const currentAgent = parent.info.agent
-      const currentIndex = history.findLastIndex(
-        (message, index) =>
-          index > parentIndex &&
-          !snapshotIDs.has(message.info.id) &&
-          message.info.role === "assistant" &&
-          message.info.parentID === parent.info.id &&
-          message.info.mode === currentAgent &&
-          message.info.time.completed === undefined &&
-          message.info.summary !== true,
-      )
-      if (currentIndex < 0) return
-
-      const current = history[currentIndex]
-      if (current.info.role !== "assistant") return
-
-      const boundedHistory = history.slice(0, currentIndex)
-      const normalUsers = new Map<
-        string,
-        Extract<(typeof history)[number]["info"], { role: "user" }>
-      >()
-      for (const message of boundedHistory) {
-        if (
-          message.info.role === "user" &&
-          !["compaction", "summary", "title"].includes(message.info.agent) &&
-          !replayUsers.has(message.info.id) &&
-          !message.parts.some((part) => part.type === "compaction") &&
-          message.parts.some(
-            (part) => part.type !== "subtask" && !("synthetic" in part && part.synthetic === true),
-          )
-        ) {
-          normalUsers.set(message.info.id, message.info)
-        }
-      }
-
-      const visibleBoundaryIDs = new Set(output.messages.map((message) => message.info.id))
-      const activityCounts = new Map<string, number>()
-      const activities: {
-        boundary: (typeof boundedHistory)[number]
-        activityAgent: string
-        boundaryKind: "user" | "assistant"
-        associatedUser: Extract<(typeof history)[number]["info"], { role: "user" }>
-        boundaryTime: number
-        due: { reminder: Reminder; ordinal: number }[]
-      }[] = []
-      for (const boundary of boundedHistory) {
         let activityAgent: string | undefined
         let boundaryKind: "user" | "assistant" | undefined
-        let associatedUser: Extract<(typeof history)[number]["info"], { role: "user" }> | undefined
-        let boundaryTime: number | undefined
-
-        if (boundary.info.role === "user" && normalUsers.has(boundary.info.id)) {
-          activityAgent = boundary.info.agent
+        if (boundary.type === "user") {
+          activityAgent = activeAgent
           boundaryKind = "user"
-          associatedUser = normalUsers.get(boundary.info.id)
-          boundaryTime = boundary.info.time.created
-        } else if (boundary.info.role === "assistant") {
-          const candidateParent = normalUsers.get(boundary.info.parentID)
+        } else if (boundary.type === "assistant") {
+          const tools = boundary.content.filter((part) => part.type === "tool")
           if (
-            candidateParent &&
-            boundary.info.mode === candidateParent.agent &&
-            boundary.info.time.completed !== undefined &&
-            boundary.info.error === undefined &&
-            boundary.info.summary !== true &&
-            !["compaction", "summary", "title"].includes(boundary.info.mode) &&
-            boundary.parts.some((part) => part.type === "step-finish") &&
-            boundary.parts.some((part) => part.type === "tool")
+            boundary.finish !== undefined &&
+            boundary.error === undefined &&
+            boundary.retry === undefined &&
+            tools.length > 0 &&
+            tools.every((tool) => tool.state.status === "completed")
           ) {
-            activityAgent = candidateParent.agent
+            activityAgent = boundary.agent
             boundaryKind = "assistant"
-            associatedUser = candidateParent
-            boundaryTime = boundary.info.time.completed
           }
         }
+        if (!activityAgent || !boundaryKind) continue
 
-        if (!activityAgent || !boundaryKind || !associatedUser || boundaryTime === undefined) continue
         const activityCount = (activityCounts.get(activityAgent) ?? 0) + 1
         activityCounts.set(activityAgent, activityCount)
-
         const due = reminders.flatMap((reminder) => {
           if (reminder.agents && !reminder.agents.has(activityAgent)) return []
           if (activityCount % reminder.frequency !== 0) return []
-          return [{ reminder, ordinal: activityCount / reminder.frequency }]
+          return [{ reminder, ordinal: activityCount / reminder.frequency, activityAgent }]
         })
-        activities.push({
-          boundary,
-          activityAgent,
-          boundaryKind,
-          associatedUser,
-          boundaryTime,
-          due,
-        })
+        if (due.length > 0) deliveries.push({ boundaryID: boundary.id, boundaryKind, reminders: due })
       }
 
-      const deliveries = new Map<
-        string,
-        {
-          target: (typeof activities)[number]
-          reminders: Map<
-            string,
-            {
-              reminder: Reminder
-              thresholds: { activityAgent: string; boundaryID: string; ordinal: number }[]
-            }
-          >
+      const positioned = deliveries.flatMap((delivery) => {
+        let targetIndex = event.messages.findIndex((message) => message.id === delivery.boundaryID)
+        if (targetIndex < 0) return []
+        if (delivery.boundaryKind === "assistant") {
+          while (event.messages[targetIndex + 1]?.role === "tool") targetIndex++
         }
-      >()
-      for (const activity of activities) {
-        if (activity.due.length === 0) continue
+        return [{ ...delivery, targetIndex }]
+      })
 
-        let delivery = deliveries.get(activity.boundary.info.id)
-        if (!delivery) {
-          delivery = { target: activity, reminders: new Map() }
-          deliveries.set(activity.boundary.info.id, delivery)
-        }
-        for (const { reminder, ordinal } of activity.due) {
-          let pending = delivery.reminders.get(reminder.identity)
-          if (!pending) {
-            pending = { reminder, thresholds: [] }
-            delivery.reminders.set(reminder.identity, pending)
-          }
-          pending.thresholds.push({
-            activityAgent: activity.activityAgent,
-            boundaryID: activity.boundary.info.id,
-            ordinal,
-          })
-        }
-      }
-
-      for (const { target: activity, reminders: pendingByReminder } of deliveries.values()) {
-        const boundary = activity.boundary
-        if (!visibleBoundaryIDs.has(boundary.info.id)) continue
-        const pendingReminders = reminders.flatMap((reminder) => {
-          const pending = pendingByReminder.get(reminder.identity)
-          return pending ? [pending] : []
-        })
-
-        const targetIndex = output.messages.findIndex((message) => message.info.id === boundary.info.id)
-        if (targetIndex < 0) continue
-
-        if (activity.boundaryKind === "user") {
-          const target = output.messages[targetIndex]
-          for (const { reminder, thresholds } of pendingReminders) {
-            const digest = createHash("sha256")
-              .update(
-                JSON.stringify({
-                  sessionID,
-                  boundaryID: boundary.info.id,
-                  boundaryKind: activity.boundaryKind,
-                  reminder: reminder.identity,
-                  thresholds,
-                }),
-              )
-              .digest("hex")
-            const partID = `prt_${digest.slice(0, 26)}`
-            if (target.parts.some((part) => part.id === partID)) continue
-            const wrapped =
-              reminder.body.startsWith("<system-reminder>") && reminder.body.endsWith("</system-reminder>")
-                ? reminder.body
-                : `<system-reminder>\n${reminder.body}\n</system-reminder>`
-            target.parts.push({
-              id: partID,
-              sessionID,
-              messageID: target.info.id,
-              type: "text",
-              text: wrapped,
-              synthetic: true,
-            })
-          }
-          continue
-        }
-
-        const messageDigest = createHash("sha256")
-          .update(
-            JSON.stringify({
-              sessionID,
-              boundaryID: boundary.info.id,
-              boundaryKind: activity.boundaryKind,
-              reminders: pendingReminders.map(({ reminder, thresholds }) => ({
-                reminder: reminder.identity,
-                thresholds,
-              })),
-            }),
-          )
-          .digest("hex")
-        const messageID = `msg_${messageDigest.slice(0, 26)}`
-        const existing = output.messages.find((message) => message.info.id === messageID)
-        const synthetic: (typeof output.messages)[number] =
-          existing ??
-          ({
-            info: {
-              id: messageID,
-              sessionID,
-              role: "user" as const,
-              time: { created: activity.boundaryTime },
-              agent: activity.associatedUser.agent,
-              model: activity.associatedUser.model,
-            },
-            parts: [],
-          } satisfies (typeof output.messages)[number])
-
-        for (const { reminder, thresholds } of pendingReminders) {
+      // Insert backwards so every durable-to-wire index remains valid during mutation.
+      positioned.sort((left, right) => right.targetIndex - left.targetIndex)
+      for (const delivery of positioned) {
+        for (let index = delivery.reminders.length - 1; index >= 0; index--) {
+          const { reminder, ordinal, activityAgent } = delivery.reminders[index]
           const digest = createHash("sha256")
             .update(
               JSON.stringify({
-                sessionID,
-                boundaryID: boundary.info.id,
-                boundaryKind: activity.boundaryKind,
+                sessionID: event.sessionID,
+                boundaryID: delivery.boundaryID,
+                boundaryKind: delivery.boundaryKind,
                 reminder: reminder.identity,
-                thresholds,
+                activityAgent,
+                ordinal,
               }),
             )
             .digest("hex")
-          const partID = `prt_${digest.slice(0, 26)}`
-          if (synthetic.parts.some((part) => part.id === partID)) continue
+          const id = `reminder_${digest.slice(0, 26)}`
+          if (event.messages.some((message) => message.id === id)) continue
           const wrapped =
             reminder.body.startsWith("<system-reminder>") && reminder.body.endsWith("</system-reminder>")
               ? reminder.body
               : `<system-reminder>\n${reminder.body}\n</system-reminder>`
-          synthetic.parts.push({
-            id: partID,
-            sessionID,
-            messageID,
-            type: "text",
-            text: wrapped,
-            synthetic: true,
-          })
+          const message = {
+            ...Message.user(wrapped),
+            id,
+            metadata: { reminder: reminder.identity, boundaryID: delivery.boundaryID, ordinal },
+          }
+          event.messages.splice(delivery.targetIndex + 1, 0, message)
         }
-        if (!existing) output.messages.splice(targetIndex + 1, 0, synthetic)
       }
-    },
-  }
-}
-
-export default remindersPlugin
+    })
+  },
+})

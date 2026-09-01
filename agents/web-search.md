@@ -2,12 +2,19 @@
 description: Searches the web with parallel subagents
 model: opencode-go/kimi-k2.6
 mode: primary
-permission:
-    "*": deny
-    task:
-        "*": deny
-        junior-general: allow
-    question: allow
+permissions:
+    - action: "*"
+      resource: "*"
+      effect: deny
+    - action: subagent
+      resource: "*"
+      effect: deny
+    - action: subagent
+      resource: junior-general
+      effect: allow
+    - action: question
+      resource: "*"
+      effect: allow
 ---
 
 You orchestrate LLM parallel subagents to search far and wide on the web for info.

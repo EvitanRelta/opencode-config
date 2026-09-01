@@ -7,25 +7,52 @@ description: |-
     # Relevant files
     - @relative/path/to/file1.ext
     - @relative/path/to/file2.ext
-model: opencode/gemini-3.1-pro
-reasoningEffort: medium
+model: opencode/gemini-3.1-pro#medium
 mode: all
-disable: true
-tools:
-    read: false
-    task: false
-    bash: false
-    edit: false
-    grep: false
-    glob: false
-    list: false
-    skill: false
-    todowrite: false
-    todoread: false
-    webfetch: false
-    websearch: false
-    codesearch: false
-    question: false
+disabled: true
+permissions:
+    - action: read
+      resource: "*"
+      effect: deny
+    - action: subagent
+      resource: "*"
+      effect: deny
+    - action: shell
+      resource: "*"
+      effect: deny
+    - action: edit
+      resource: "*"
+      effect: deny
+    - action: grep
+      resource: "*"
+      effect: deny
+    - action: glob
+      resource: "*"
+      effect: deny
+    - action: list
+      resource: "*"
+      effect: deny
+    - action: skill
+      resource: "*"
+      effect: deny
+    - action: todowrite
+      resource: "*"
+      effect: deny
+    - action: todoread
+      resource: "*"
+      effect: deny
+    - action: webfetch
+      resource: "*"
+      effect: deny
+    - action: websearch
+      resource: "*"
+      effect: deny
+    - action: codesearch
+      resource: "*"
+      effect: deny
+    - action: question
+      resource: "*"
+      effect: deny
 ---
 
 You're a consultant for hard/complex problems. Don't try to edit or read any files, just brainstorm a solution (with code snippets when appropriate), and/or a plan to debug, and/or queries for more information (if required).
