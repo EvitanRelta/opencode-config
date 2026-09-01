@@ -74,6 +74,8 @@ This auto-discovers all `tests/*.cpp` files, excludes `test_main.cpp` from the g
 
 Note: `CONFIGURE_DEPENDS` re-globs at build time, but some generators may need a `cmake -B build` re-run before a newly added file is picked up.
 
+KEEP exactly one first-party doctest executable. ADD all test sources, including conditional or platform-specific tests, to the existing `tests` target. DO NOT create dedicated test runners.
+
 ## Writing Tests
 
 ### Dedicated test files (preferred)
