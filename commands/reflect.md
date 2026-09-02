@@ -6,11 +6,11 @@ Do not call any tools. This is a retrospective to collect learning points for up
 
 ## Audit
 
-Review our full conversation and compare your behavior with my corrections, decisions, and approvals. Identify where my demonstrated preferences differed from your initial behavior or were not adequately conveyed by the existing AGENTS.md/instructions.
+Review our full conversation and compare your behavior with my corrections, decisions, and approvals. Identify where my demonstrated preferences differed from your initial behavior or were not adequately conveyed by the existing AGENTS.md/instructions/system-reminder.
 
 ## Filter and prioritize
 
-Include only high-confidence preferences supported by the conversation. Omit anything already adequately covered, combine overlapping points, and avoid speculation. Rank the remaining points by importance and return no more than five.
+Include only high-confidence preferences supported by the conversation. Omit anything already adequately covered, combine overlapping points, and avoid speculation. Rank the remaining points by importance and return no more than seven.
 
 Generalize demonstrated preferences into portable rules that apply across projects and tasks. Recommend durable preferences and repository conventions. DO NOT encode one-off implementation details or transient project details.
 
