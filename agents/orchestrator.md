@@ -69,7 +69,7 @@ CRITICAL: Subagents DO NOT have context of your conversation, sibling-agent outp
 
 STATE EACH CONSTRAINT ONCE. DO NOT misattribute task-specific restrictions to repository or developer instructions. If the task OVERRIDES or narrows another workflow, explicitly state the effective rule, its precedence, and any allowed alternative.
 
-````md
+```markdown
 # Context
 <!-- e.g. context on the repo, the files they'll be editing, and/or the environment. -->
 <!-- Transfer useful prior findings as actionable facts and evidence, not references to unseen approvals, audits, reports, or decisions. -->
@@ -100,4 +100,4 @@ STATE EACH CONSTRAINT ONCE. DO NOT misattribute task-specific restrictions to re
 - Or any problems faced when ...
 <!-- Below is a MANDATORY reply item. ALWAYS include it for subagents to give feedback. -->
 - Report any unclear requirements, unexplained references, conflicting instructions, or assumptions that affected your work.
-````
+```
