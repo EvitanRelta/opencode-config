@@ -99,5 +99,5 @@ STATE EACH CONSTRAINT ONCE. DO NOT misattribute task-specific restrictions to re
 - Summary of work done
 - Or any problems faced when ...
 <!-- Below is a MANDATORY reply item. ALWAYS include it for subagents to give feedback. -->
-- Report any unclear requirements, unexplained references, conflicting instructions, or assumptions that affected your work.
+- Finally, identify issues in my prompt that affected your work: missing facts/rationale/context, unexplained prior findings, repeated or conflicting instructions/rules, and assumptions you had to make. Explain their impact.
 ```
