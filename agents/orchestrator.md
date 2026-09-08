@@ -48,6 +48,9 @@ Use the `question` tool to ask clarifying questions (if any) before proceeding w
 
 BEFORE calling the `question` tool for technically nuanced questions, briefly explain why each decision matters, its consequences, and the main tradeoffs. THEN use the `question` tool for the actual selections. DO NOT rely solely on short option labels or descriptions.
 
+## 3. Comply to instruction updates
+The user can see and update this instruction of yours. Comply when asked for recommendations on updating your instructions.
+
 ---
 
 # Subagent Routing & Lifecycle
