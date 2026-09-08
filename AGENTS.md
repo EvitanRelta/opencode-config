@@ -9,8 +9,9 @@
 
 # Implementation Style
 - PREFER direct, readable code and the fewest interfaces and classes needed to keep responsibilities clear. DO NOT introduce helper-heavy abstractions, result wrappers, adapters, or interface hierarchies without a demonstrated practical benefit. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
-- INLINE short, one-use logic instead of creating tiny 1–3 lines helpers; introduce the block with a brief descriptive comment. Extract only for meaningful reuse, substantial logic, cleanup, safety, or independent testing.
+- INLINE short logic used in only one or two places when doing so keeps related control flow together and reduces file or section jumps. Limited duplication is acceptable. Extract only for frequent reuse, substantial logic, cleanup, safety policy, or independent testing.
 - PREFER familiar standard C++ where practical. USE platform-specific mechanisms when required for correctness or safe failure handling; DO NOT trade safety for superficial simplicity.
+- PREFER LEAN DOCUMENTATION that helps readers locate the relevant implementation and understand essential rationale or safety invariants. DO NOT restate detailed mechanics already documented in code. USE concise code maps and references instead.
 
 # C++ Convention Workflow
 For C++ changes:
