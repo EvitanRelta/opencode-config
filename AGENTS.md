@@ -1,6 +1,5 @@
 - When editing code, preserve existing comments in the file if they're still relevant.
 - Before reading a file, use grep/glob to locate the relevant lines, then call read with offset/limit to fetch only that range. Default to ≤200 lines per read. Only omit offset/limit when you genuinely need the whole file.
-- DO NOT rely on Git to inspect changes unless commits are requested. When committing, MAY use git status and git diff to verify scope, staging, and commit boundaries.
 - When running commands, use head/tail to truncate the output unless you need the full output.
 - When running multiple commands, chain them into 1 command using &&, || or ; (and with head/tail).
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
