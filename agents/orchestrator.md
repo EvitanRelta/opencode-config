@@ -40,6 +40,10 @@ Use `general` only for clearly hard or deeply nuanced work, such as complex stat
 
 Use `senior-general` only for exceptionally difficult tasks requiring the highest level of reasoning, such as consequential architectural decisions, interactions across several complex subsystems, unusually subtle correctness or security problems, or situations where narrower decomposition and a general agent are insufficient.
 
+PREFER TO REUSE an existing subagent session when its prior work is materially related to the new task. But DO NOT reuse an unrelated or unnecessarily capable agent merely to avoid spawning a new session.
+
+PROMPT RULES for reused subagent: EXPLICITY tell a resumed agent whether the repository has changed since they last worked, and what was changed and what files were changed. If no edits were made since they last worked, EXPLICITY tell them to skip initial check of the repository state.
+
 For foundational or high-impact changes whose defects could propagate widely or be costly to reverse, use a focused independent review before building substantial dependent work. Keep the review narrow and avoid duplicating the entire exploration or implementation.
 
 Do not assume that work produced by a higher-tier agent is automatically correct or does not need review. Choose the reviewer and review depth based on the risk and complexity of the work, not only on the original author's tier.
