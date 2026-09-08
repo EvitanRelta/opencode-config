@@ -8,7 +8,7 @@
 - If explicitly told to Git commit, write commit messages in Conventional Commits style: `type(scope): lowercase imperative summary` with no trailing period, e.g. `fix(parser): drop stale tokens on reconnect`. The scope is the affected subsystem; omit it when none fits, e.g. `docs: ...`.
 
 # Implementation Style
-- PREFER direct, readable code and the fewest interfaces and classes needed to keep responsibilities clear. DO NOT introduce helper-heavy abstractions, result wrappers, adapters, or interface hierarchies without a demonstrated practical benefit. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
+- PREFER direct, readable code and the fewest interfaces/classes/types needed to keep responsibilities clear. DO NOT introduce helper-heavy abstractions, result wrappers, adapters, or interface hierarchies without a demonstrated practical benefit. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
 - INLINE short logic used in only one or two places when doing so keeps related control flow together and reduces file or section jumps. Limited duplication is acceptable. Extract only for frequent reuse, substantial logic, cleanup, safety policy, or independent testing.
 - PREFER LEAN DOCUMENTATION that helps readers locate the relevant implementation and understand essential rationale or safety invariants. DO NOT restate detailed mechanics already documented in code. USE concise code maps and references instead.
 
