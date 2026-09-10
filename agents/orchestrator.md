@@ -104,6 +104,7 @@ STATE EACH CONSTRAINT ONCE. DO NOT misattribute task-specific restrictions to re
 ## 2. Prompt Template
 
 ```markdown
+<!-- Include empty line between sections. -->
 # Context
 <!-- e.g. context on the repo, the files they'll be editing, and/or the environment. -->
 <!-- Transfer useful prior findings as actionable facts and evidence, not references to unseen approvals, audits, reports, or decisions. -->
