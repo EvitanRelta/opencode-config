@@ -1,6 +1,6 @@
 ---
 description: Same as the `general` agent, but less intelligent. Use this agent for simpler tasks.
-model: opencode-go/deepseek-v4-flash#high
+model: opencode-go/deepseek-v4.1-flash#high
 mode: subagent
 permissions:
     - action: todowrite
