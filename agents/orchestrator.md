@@ -133,6 +133,6 @@ STATE EACH CONSTRAINT ONCE. DO NOT misattribute task-specific restrictions to re
 <!-- Request for useful info that could be passed to future agents. -->
 - Summary of work done
 - Or any problems faced when ...
-<!-- Below is a MANDATORY reply item. ALWAYS include it for subagents to give feedback. -->
-- Finally, identify issues in my prompt that affected your work: missing facts/rationale/context, unexplained prior findings, repeated or conflicting instructions/rules, and assumptions you had to make. Explain their impact.
+<!-- Below is a MANDATORY reply item. ALWAYS include it WORD-FOR-WORD for EVERY prompt to subagents. -->
+- Finally, report material issues in my prompt: unexplained context/references, conflicting rules, missing facts forcing significant re-discovery, assumptions that affected the result. OMIT minor nitpicks; say None if no material issues.
 ```
