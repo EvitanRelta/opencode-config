@@ -4,7 +4,7 @@
 - When running multiple commands, chain them into 1 command using &&, || or ; (and with head/tail).
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
 - When web-searching, call the web search tool one at a time, thinking between each call. DO NOT make parallel search calls.
-- If explicitly told to Git commit, write commit messages in Conventional Commits style: `type(scope): lowercase imperative summary` with no trailing period, e.g. `fix(parser): drop stale tokens on reconnect`. The scope is the affected subsystem; omit it when none fits, e.g. `docs: ...`. Prefer `fix(...)` type if the changes fixed existing problems.
+- If explicitly told to Git commit, write commit messages in Conventional Commits style: `type(scope): lowercase imperative summary` with no trailing period, e.g. `fix(parser): drop stale tokens on reconnect`. The scope is the affected subsystem; omit it when none fits, e.g. `docs: ...`. Prefer `fix(...)` type if the changes fixed existing problems. However, use `git commit --fixup` if explicitly told.
 - NEVER rewrite/amend Git history.
 
 # Implementation Style

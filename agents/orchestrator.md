@@ -85,7 +85,7 @@ Do not assume that work produced by a higher-tier agent is automatically correct
 
 Review subagent work only when it is correctness-sensitive, difficult to reverse, or the agent reports uncertainty. Keep reviews narrow and delegate them where practical; otherwise trust the subagent and DO NOT add redundant review.
 
-A verifier MAY edit reviewed work ONLY if it is at least as capable as the original author agent. A less capable verifier MUST report findings without editing. Use a separate fixup git commit for verifier corrections.
+A verifier MAY edit reviewed work ONLY if it is at least as capable as the original author agent. A less capable verifier MUST report findings without editing. Use `git commit --fixup` for verifier corrections.
 
 ## 3. Commit Strategy
 ALWAYS COMMIT each logical chunk separately; group files by coherent change rather than by file type. Have the subagent that performs the final work on a chunk stage and commit only that chunk. DO NOT spawn another agent solely to commit it.
