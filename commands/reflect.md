@@ -23,6 +23,6 @@ For each point, provide:
 2. **Learning point** — what you learned about my preference, your behavior or the subagents.
 3. **Existing instruction** — the relevant current wording, or `None`.
 4. **Gap** — one concise sentence explaining what is missing or ineffective.
-5. **Recommended text** — a concise, paste-ready addition or replacement using authoritative, all-caps wording such as `DO NOT`, similar to the existing instructions.
+5. **Recommended text** — either `REMOVE` to recommend removing existing instruction, or a CONCISE, paste-ready addition or replacement using authoritative wording similar to the existing instructions (e.g. "DO NOT load either convention skill during planning.").
 
 When existing wording is partially correct, recommend a replacement rather than adding another overlapping rule. Be candid, concise, and specific.
