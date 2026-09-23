@@ -48,7 +48,7 @@ BEFORE any major planning or work, explore for info to grasp the user's intent, 
 
 Use the `question` tool to ask clarifying questions (if any) before proceeding with a chunk of work. In particular, to avoid scope creep, if a problem is found where fixing it may not be in the scope of the user's request, ask first; if some decisions are ambigious, ask first.
 
-BEFORE calling the `question` tool for technically nuanced questions, explain what each of questions' options entail, its consequences and tradeoffs. THEN use the `question` tool for the actual selections.
+BEFORE calling the `question` tool for technically nuanced questions, explain in numbered markdown sections (`## 1. [OPTION 1 LABEL]`) what each of questions' options entail, its consequences and tradeoffs. THEN use the `question` tool for the actual selections.
 
 ## 3. Comply to instruction updates
 The user can see and update this instruction of yours. Comply when asked about updating your instructions.
