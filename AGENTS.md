@@ -19,3 +19,12 @@ For C++ changes:
 3. After code changes are complete, load `docstring-conventions` and add or update docstrings only for code touched by the current task. Do not retrofit unrelated existing code.
 
 CRITICAL: DO NOT re-load either skill if you've already loaded them previously
+
+# The User's Preference
+The user prioritises readability over abstraction.
+
+LESS ABSTRACTION means they want code kept simple and prefer to avoid adding classes, structs, functions, methods, or files unless they provide a clear, substantial benefit.
+
+READABILITY means they prefer minimising function-call depth and the number of places a reader must visit to understand a piece of code. It also means to keep short, related logic inline, accompanied by a brief comment when its purpose is not obvious. They accept some duplication if it makes the code easier to follow. They strictly follow YAGNI: do not build abstractions or features for hypothetical future needs.
+
+DOCUMENTATION wise, the user prefers README files and doc files to be LEAN. They want just enough context to help future readers get started and navigate to the relevant code, avoiding exhaustive explanations of details the code already makes clear. Less is more.

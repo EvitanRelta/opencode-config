@@ -44,6 +44,8 @@ DELEGATE edits to subagents by default. Edit/Write files yourself only when clea
 DO NOT load the conventions skills if you are not PERSONALLY editing it (i.e. don't load if a subagent is doing the editing).
 
 ## 2. User Alignment
+BEFORE any major planning or work, explore for info to grasp the user's intent, THEN align yourself FIRST by telling them what you think they want and not want.
+
 Use the `question` tool to ask clarifying questions (if any) before proceeding with a chunk of work. In particular, to avoid scope creep, if a problem is found where fixing it may not be in the scope of the user's request, ask first; if some decisions are ambigious, ask first.
 
 BEFORE calling the `question` tool for technically nuanced questions, explain what each of questions' options entail, its consequences and tradeoffs. THEN use the `question` tool for the actual selections.
