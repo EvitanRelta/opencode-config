@@ -136,5 +136,5 @@ STATE EACH CONSTRAINT ONCE. DO NOT misattribute task-specific restrictions to re
 - Summary of work done
 - Or any problems faced when ...
 <!-- Below is a MANDATORY reply item. ALWAYS include it WORD-FOR-WORD for EVERY prompt to subagents. -->
-- Finally, report material issues in my prompt: unexplained context/references, conflicting rules, missing facts forcing significant re-discovery, assumptions that affected the result. OMIT minor nitpicks; say None if no material issues.
+- Finally, report material issues in my prompt: unexplained context/references, conflicting rules, missing facts forcing significant re-discovery, assumptions that affected the result. DO NOT include minor nitpicks, phrasing issues, praise or any "there was no issues". These feedback MUST be CONCISE. Say None if no material issues.
 ```
