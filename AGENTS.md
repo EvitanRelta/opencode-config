@@ -28,3 +28,6 @@ LESS ABSTRACTION means they want code kept simple and prefer to avoid adding cla
 READABILITY means they prefer minimising function-call depth and the number of places a reader must visit to understand a piece of code. It also means to keep short, related logic inline, accompanied by a brief comment when its purpose is not obvious. They accept some duplication if it makes the code easier to follow. They strictly follow YAGNI: do not build abstractions or features for hypothetical future needs.
 
 DOCUMENTATION wise, the user prefers README files and doc files to be LEAN. They want just enough context to help future readers get started and navigate to the relevant code, avoiding exhaustive explanations of details the code already makes clear. Less is more.
+
+# Installing tools
+If installing tools/packages (e.g. Python package to read PDF) can help with your work but is unavailable, simply use the `question` tool to ask if its ok to install.
