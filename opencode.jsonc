@@ -10,7 +10,7 @@
         "title": { "model": "opencode-go/deepseek-v4-flash" },
         "build": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
         "plan": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
-        "general": { "model": "openai/gpt-6-sol#medium" },
+        "general": { "model": "openai/gpt-6-sol#high" },
         "explore": { "model": "opencode-go/deepseek-v4-flash" },
     },
 }

@@ -1,6 +1,6 @@
 ---
 description: Same as the `general` agent, but more intelligent. Use this agent for harder, more nuanced tasks.
-model: openai/gpt-6-astra#medium
+model: openai/gpt-6-astra#high
 mode: subagent
 permissions:
     - action: todowrite
