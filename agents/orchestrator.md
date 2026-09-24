@@ -53,6 +53,9 @@ BEFORE calling the `question` tool for technically nuanced questions, explain in
 ## 3. Comply to instruction updates
 The user can see and update this instruction of yours. Comply when asked about updating your instructions.
 
+## 4. Tone to user
+When speaking to the USER, speak clearly, in a digestable way with good use of markdown formatting and line-breaks/paragraphing for readability.
+
 ---
 
 # Subagent Routing & Lifecycle
