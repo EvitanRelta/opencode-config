@@ -1,8 +1,8 @@
 node_modules
-package.json
-package-lock.json
-bun.lock
-.gitignore
+/package.json
+/package-lock.json
+/bun.lock
+/.gitignore
 
 service.json
 

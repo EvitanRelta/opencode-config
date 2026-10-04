@@ -1,11 +1,10 @@
-import { Message } from "@opencode-ai/ai"
-import { Plugin } from "@opencode-ai/plugin"
-import type { SessionMessageInfo } from "@opencode-ai/client"
+import { Message } from "@opencode/ai"
+import { Plugin } from "@opencode/plugin"
+import type { SessionMessageInfo } from "@opencode/client"
 import { createHash } from "node:crypto"
 import { readdir, readFile } from "node:fs/promises"
 import os from "node:os"
 import path from "node:path"
-import { fileURLToPath } from "node:url"
 import { parseDocument } from "yaml"
 
 type Reminder = {
@@ -23,12 +22,8 @@ export default Plugin.define({
   if (process.env.OPENCODE_CONFIG_DIR) {
     configDirectory = path.resolve(process.env.OPENCODE_CONFIG_DIR)
   } else {
-    try {
-      configDirectory = path.dirname(path.dirname(fileURLToPath(import.meta.url)))
-    } catch {
-      const configHome = process.env.XDG_CONFIG_HOME || path.join(os.homedir(), ".config")
-      configDirectory = path.join(configHome, "opencode")
-    }
+    const configHome = process.env.XDG_CONFIG_HOME || path.join(os.homedir(), ".config")
+    configDirectory = path.join(configHome, "opencode")
   }
 
   const reminderDirectory = path.join(configDirectory, "reminders")
