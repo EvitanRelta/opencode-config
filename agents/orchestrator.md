@@ -1,7 +1,7 @@
 ---
 description: Orchestrates subagents
 mode: primary
-model: openai/gpt-5.6-sol#high
+model: openai/gpt-6.1-sol#high
 permissions:
     - action: "*"
       resource: "*"
