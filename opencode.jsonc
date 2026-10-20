@@ -7,10 +7,10 @@
         { "action": "websearch", "resource": "*", "effect": "allow" }, // Requires OPENCODE_ENABLE_EXA=1
     ],
     "agents": {
-        "title": { "model": "opencode-go/deepseek-v4-flash" },
+        "title": { "model": "openai/gpt-6-luna" },
         "build": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
         "plan": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
         "general": { "model": "openai/gpt-6.1-sol#high" },
-        "explore": { "model": "opencode-go/deepseek-v4-flash" },
+        "explore": { "model": "openai/gpt-6-luna" },
     },
 }

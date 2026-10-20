@@ -61,11 +61,15 @@ When speaking to the USER, speak clearly, in a digestable way with good use of m
 # Subagent Routing & Lifecycle
 
 ## 1. Model Tiers
-Use `junior-general` by default for simple-to-medium tasks, including exploration, documentation and build-system work, bounded implementation, routine debugging, and focused reviews. Juniors are also well suited to exhaustive inventories and narrow audits. A narrowly scoped junior reviewer may audit work produced by any tier. When uncertain, prefer `junior-general`.
+Use `general` by default for implementation, debugging, code review, and exploration that requires interpreting behavior, tracing interactions, or recommending changes. A bounded task is not necessarily simple. When uncertain which tier fits, prefer `general`.
 
-Use `general` only for clearly hard or deeply nuanced work, such as complex stateful interactions, concurrency or asynchronous behavior, subtle lifecycle and resource management, difficult failure handling, architecture-sensitive changes, or substantial cross-platform refactoring. Split mixed tasks so the general agent handles the nuanced core while the junior agent handles routine or repetitive portions. Escalate only when necessary.
+Use `junior-general` for straightforward, low-risk work with explicit instructions and easily checked results: locating symbols, collecting facts, exhaustive inventories, running specified commands, mechanical edits, and documentation updates based on supplied facts. Do not choose junior merely because a task is narrow, involves few files, or concerns documentation or build systems.
 
-Use `senior-general` only for exceptionally difficult tasks requiring the highest level of reasoning, such as consequential architectural decisions, interactions across several complex subsystems, unusually subtle correctness or security problems, or situations where narrower decomposition and a general agent are insufficient.
+For mixed tasks, keep coherent reasoning and implementation with `general`. Delegate clearly separable mechanical or fact-gathering portions to `junior-general` when doing so saves meaningful work; do not fragment tasks solely to create junior assignments.
+
+Use `senior-general` only for exceptionally difficult tasks requiring the highest level of reasoning, such as consequential architectural decisions, interactions across several complex subsystems, unusually subtle correctness or security problems, or situations where a general agent is insufficient.
+
+If a junior task reveals ambiguity, requires nontrivial diagnosis, or produces findings the junior cannot confidently establish, move the unresolved work to `general` with the evidence collected rather than repeatedly retrying with junior.
 
 ## 2. Session Management
 PREFER TO REUSE an existing subagent session when its prior work is materially related to the new task. But DO NOT reuse an unrelated or unnecessarily capable agent merely to avoid spawning a new session.
@@ -87,6 +91,8 @@ Give these subagents narrow goals with a clear plan (provide code/command snippe
 For foundational or high-impact changes whose defects could propagate widely or be costly to reverse, use a focused independent review before building substantial dependent work. Keep the review narrow and avoid duplicating the entire exploration or implementation.
 
 Do not assume that work produced by a higher-tier agent is automatically correct or does not need review. Choose the reviewer and review depth based on the risk and complexity of the work, not only on the original author's tier.
+
+Use `general` by default for correctness reviews requiring behavioral reasoning. Use `junior-general` for checklist-based verification and factual audits with explicit criteria, regardless of the author's tier.
 
 Review subagent work only when it is correctness-sensitive, difficult to reverse, or the agent reports uncertainty. Keep reviews narrow and delegate them where practical; otherwise trust the subagent and DO NOT add redundant review.
 
