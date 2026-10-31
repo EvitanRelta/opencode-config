@@ -98,13 +98,12 @@ Rarely, a small utility test may appear at the bottom of a source `.cpp` file:
 ```cpp
 // src/utils/some_util.cpp
 
+#include "doctest/doctest.h"
 #include "utils/some_util.h"
 
 // ... implementation ...
 
 // Colocated test — automatically disabled in production via DOCTEST_CONFIG_DISABLE
-#include "doctest/doctest.h"
-
 TEST_CASE("some_util behaves correctly") {
     CHECK(some_util(0) == 0);
 }
