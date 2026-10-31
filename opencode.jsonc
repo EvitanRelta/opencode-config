@@ -1,6 +1,6 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "plugins": ["-@tarquinen/opencode-dcp@latest"],
+    "plugins": ["@tarquinen/opencode-dcp@latest"],
     "lsp": false,
     "permissions": [
         { "action": "lsp", "resource": "*", "effect": "allow" }, // Requires OPENCODE_EXPERIMENTAL_LSP_TOOL=true
