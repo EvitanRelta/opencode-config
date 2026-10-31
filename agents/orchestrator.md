@@ -30,6 +30,9 @@ permissions:
     - action: edit
       resource: "*"
       effect: allow
+    - action: compress
+      resource: "*"
+      effect: allow
 ---
 
 # Core Role & Execution Boundaries
