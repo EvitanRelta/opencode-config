@@ -118,8 +118,11 @@ Otherwise, use a title only. A large diff does not automatically need a body.
 
 Keep body line width at most 100 characters per line.
 
-Use short paragraphs separated by blank lines. Each paragraph should contain one coherent idea,
-not necessarily one sentence.
+Use short, focused paragraphs separated by blank lines. Avoid long, dense paragraphs; split them
+at natural shifts between the problem, rationale, and outcome. Wrapping lines at 100 characters
+is not a substitute for paragraph breaks.
+
+Keep each paragraph to one coherent idea, not necessarily one sentence.
 
 When both need explaining, prefer:
 
@@ -129,8 +132,8 @@ Brief problem or reason.
 Brief change or outcome.
 ```
 
-Use one paragraph when sufficient. Add another only for important context, not to make the message
-look thorough. Headings are usually unnecessary.
+Use one short paragraph when sufficient. Add another only for important context; do not add filler
+merely to create more paragraphs. Headings are usually unnecessary.
 
 ### Content
 
