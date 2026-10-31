@@ -18,6 +18,7 @@ Base the message on the actual diff and known context. Do not invent rationale, 
 ## Titles
 
 - Use an imperative summary: `prevent`, `add`, `remove`, not `prevented` or `adds`.
+- Do not end the commit title with a period.
 - Keep the entire title at most **100 characters**, including the prefix.
 - Use lowercase wording except for proper names, identifiers, filenames, and established notation.
 - Describe the concrete change, not vague work such as "improve handling".
