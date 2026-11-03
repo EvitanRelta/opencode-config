@@ -1,5 +1,5 @@
 {
-    "$schema": "https://opencode.ai/config.json",
+    "$schema": "./opencode_schema.json",
     "plugins": ["@tarquinen/opencode-dcp@latest"],
     "lsp": false,
     "permissions": [
