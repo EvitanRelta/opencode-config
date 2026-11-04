@@ -4,7 +4,7 @@
 - When running multiple commands, chain them into 1 command using &&, || or ; (and with head/tail).
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
 - When web-searching, call the web search tool one at a time, thinking between each call. DO NOT make parallel search calls.
-- When explicitly told to commit, load `commit-message-conventions` before drafting the message. Skip the skill when instructed to use an exact message or `git commit --fixup`; follow that instruction instead.
+- When told to commit, PREFER `git commit --fixup=<commit>` for changes belonging to an existing commit; otherwise load `commit-message-conventions`. Skip the skill when instructed to use an exact message or to `git commit --fixup`; follow that instruction instead.
 - NEVER rewrite/amend Git history.
 
 # Implementation Style
