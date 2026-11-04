@@ -48,13 +48,23 @@ test(session): cover disconnect, reconnect, and explicit restart approval across
 
 ## Types and scopes
 
-Use the type matching the primary purpose:
+Choose the type by the primary purpose, not merely the area or files changed:
 
-- `fix`: correct existing behavior.
+- `fix`: correct broken or unintended behavior, including in builds, CI, and tooling.
 - `feat`: add a capability.
 - `refactor`: restructure code without intentionally changing behavior.
 - `docs`, `test`, `style`: documentation-only, test-only, or formatting-only changes.
-- `build`, `ci`, `chore`: build changes, CI changes, or other maintenance.
+- `build`, `ci`, `chore`: non-fix changes to builds, CI, or other maintenance.
+
+When a change repairs something that should already work, prefer `fix` and use the scope
+to identify the affected area. Do not classify a fix as `ci`, `build`, or `chore` merely
+because it changes infrastructure or configuration.
+
+Examples:
+
+- `fix(ci): install missing dependencies before running tests`
+- `fix(build): link the required system library`
+- `ci: run tests on Windows` (new coverage, not a repair)
 
 Supporting tests and documentation do not change the type of a behavioral commit.
 
