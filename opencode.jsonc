@@ -1,6 +1,8 @@
 {
     "$schema": "./opencode_schema.json",
-    "plugins": ["@tarquinen/opencode-dcp@latest"],
+    "plugins": [
+        "@cortexkit/opencode-magic-context@latest"
+    ],
     "lsp": false,
     "permissions": [
         { "action": "lsp", "resource": "*", "effect": "allow" }, // Requires OPENCODE_EXPERIMENTAL_LSP_TOOL=true
@@ -12,5 +14,9 @@
         "plan": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
         "general": { "model": "openai/gpt-6.1-sol#high" },
         "explore": { "model": "openai/gpt-6-luna" },
+    },
+    "compaction": {
+        "auto": false,
+        "prune": false
     },
 }

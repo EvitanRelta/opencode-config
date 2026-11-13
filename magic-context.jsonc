@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cortexkit/magic-context/master/assets/magic-context.schema.json",
+  "execute_threshold_tokens": { "default": 150000 },
+  "protected_tokens": 15000,
+  "historian": {
+    "opencode": {
+      "model": { "model": "openai/gpt-6-luna", "variant": "high" }
+    }
+  },
+  "dreamer": {
+    "disable": true
+  }
+}
