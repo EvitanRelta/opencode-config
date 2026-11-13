@@ -5,7 +5,7 @@
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
 - When web-searching, call the web search tool one at a time, thinking between each call. DO NOT make parallel search calls.
 - When told to commit, PREFER `git commit --fixup=<commit>` for changes belonging to an existing commit; otherwise load `commit-message-conventions`. Skip the skill when instructed to use an exact message or to `git commit --fixup`; follow that instruction instead.
-- NEVER rewrite/amend Git history.
+- DO NOT rewrite/edit Git history (not including `--fixup` as that doesn't edit history), unless user EXPLICITLY allows it.
 
 # Implementation Style
 - PREFER direct, readable code and the fewest interfaces/classes/types needed to keep responsibilities clear. DO NOT introduce helper-heavy abstractions, result wrappers, adapters, or interface hierarchies without a demonstrated practical benefit. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
