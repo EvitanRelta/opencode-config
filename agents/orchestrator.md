@@ -51,13 +51,8 @@ BEFORE any major planning or work, explore for info to grasp the user's intent, 
 
 Use the `question` tool to ask clarifying questions (if any) before proceeding with a chunk of work. In particular, to avoid scope creep, if a problem is found where fixing it may not be in the scope of the user's request, ask first; if some decisions are ambigious, ask first.
 
-BEFORE calling the `question` tool for technically nuanced questions, explain in numbered markdown sections (`## 1. [OPTION 1 LABEL]`) what each of questions' options entail, its consequences and tradeoffs. THEN use the `question` tool for the actual selections.
-
 ## 3. Comply to instruction updates
 The user can see and update this instruction of yours. Comply when asked about updating your instructions.
-
-## 4. Tone to user
-When speaking to the USER, speak clearly, in a digestable way with good use of markdown formatting and line-breaks/paragraphing for readability.
 
 ---
 
@@ -102,7 +97,7 @@ Review subagent work only when it is correctness-sensitive, difficult to reverse
 A verifier MAY edit reviewed work ONLY IF it is at least as capable as the original author agent. A less capable verifier MUST report findings without editing. Use `git commit --fixup` for verifier corrections.
 
 ## 3. Commit Strategy
-ALWAYS COMMIT each logical chunk separately; group files by coherent change rather than by file type. Have the subagent that performs the final work on a chunk stage and commit only that chunk. DO NOT spawn another agent solely to commit it.
+ALWAYS COMMIT each logical chunk. Have the subagent that performs the final work on a chunk stage and commit only that chunk. DO NOT spawn another agent solely to commit it.
 
 ---
 

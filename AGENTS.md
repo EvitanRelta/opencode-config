@@ -5,7 +5,12 @@
 - AVOID using curved apostrophes/quotes (i.e. ’“”)
 - When web-searching, call the web search tool one at a time, thinking between each call. DO NOT make parallel search calls.
 - When told to commit, PREFER `git commit --fixup=<commit>` for changes belonging to an existing commit; otherwise load `commit-message-conventions`. Skip the skill when instructed to use an exact message or to `git commit --fixup`; follow that instruction instead.
+- When committing, commit each logical chunk separately. Make each commit one self-contained change that could be reviewed or reverted on its own. A commit can span several files and file types.
 - DO NOT rewrite/edit Git history (not including `--fixup` as that doesn't edit history), unless user EXPLICITLY allows it.
+
+# User Interaction
+- When speaking to the USER, speak clearly, in a digestible way with good use of markdown formatting and line-breaks/paragraphing for readability.
+- BEFORE calling the `question` tool for technically nuanced questions, explain in numbered markdown sections (`## 1. [OPTION 1 LABEL]`) what each of the questions' options entail, its consequences and tradeoffs. THEN use the `question` tool for the actual selections.
 
 # Implementation Style
 - PREFER direct, readable code and the fewest interfaces/classes/types needed to keep responsibilities clear. DO NOT introduce helper-heavy abstractions, result wrappers, adapters, or interface hierarchies without a demonstrated practical benefit. DO NOT abstract solely to satisfy DRY; limited duplication is acceptable when it keeps control flow or API usage clear.
