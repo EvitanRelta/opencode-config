@@ -9,11 +9,11 @@
         { "action": "websearch", "resource": "*", "effect": "allow" }, // Requires OPENCODE_ENABLE_EXA=1
     ],
     "agents": {
-        "title": { "model": "openai/gpt-6-luna" },
+        "title": { "model": "claude-agent/haiku" },
         "build": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
         "plan": { "permissions": [{ "action": "subagent", "resource": "*", "effect": "deny" }] },
-        "general": { "model": "openai/gpt-6.1-sol#high" },
-        "explore": { "model": "openai/gpt-6-luna" },
+        "general": { "model": "claude-agent/opus#high" },
+        "explore": { "model": "claude-agent/haiku" },
     },
     "compaction": {
         "auto": false,

@@ -1,6 +1,6 @@
 ---
 description: Same as the `general` agent, but less intelligent. Use this agent for simpler tasks.
-model: openai/gpt-6-luna#high
+model: claude-agent/haiku#high
 mode: subagent
 permissions:
     - action: todowrite
