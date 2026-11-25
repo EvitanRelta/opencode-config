@@ -9,7 +9,7 @@
     "thinking": "hide",
     "terminal": false,
     "grouping": "none",
-    "verbosity": "medium"
+    "verbosity": "low"
   },
   "animations": true,
   "prompt": {
