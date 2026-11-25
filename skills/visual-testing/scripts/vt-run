@@ -1,0 +1,28 @@
+#!/bin/bash
+# vt-run: run a command on a private hidden Xvfb display, then tear the display down.
+# Usage: vt-run [-n DISPLAY_NUM] [-s WxH] -- COMMAND...
+# Exits with COMMAND's status; apps still running on the display exit when it goes away.
+set -u
+n=99 size=1600x900
+while getopts "n:s:" o; do case $o in n) n=$OPTARG ;; s) size=$OPTARG ;; *) exit 2 ;; esac; done
+shift $((OPTIND - 1))
+[ $# -gt 0 ] || { echo "usage: vt-run [-n DISPLAY_NUM] [-s WxH] -- COMMAND..." >&2; exit 2; }
+
+# Keep every toolkit off the WSLg desktop; unix: avoids WSL's ~135 s TCP fallback hang
+export DISPLAY=unix:$n QT_QPA_PLATFORM=xcb GDK_BACKEND=x11
+unset WAYLAND_DISPLAY
+
+if xdotool getdisplaygeometry >/dev/null 2>&1; then
+    echo "vt-run: :$n is in use, pick another -n" >&2
+    exit 1
+fi
+# WSL prints harmless "failed to create listener" errors: /tmp/.X11-unix is read-only there
+Xvfb :$n -screen 0 "${size}x24" -nolisten tcp 2>/dev/null &
+xvfb=$!
+trap 'kill $xvfb 2>/dev/null; wait $xvfb 2>/dev/null' EXIT
+for _ in $(seq 100); do xdotool getdisplaygeometry >/dev/null 2>&1 && break; sleep 0.05; done
+if ! kill -0 $xvfb 2>/dev/null || ! xdotool getdisplaygeometry >/dev/null 2>&1; then
+    echo "vt-run: Xvfb failed to start on :$n" >&2
+    exit 1
+fi
+"$@"
