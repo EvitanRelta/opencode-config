@@ -26,5 +26,8 @@
     "layout": "horizontal",
     "scope": "cwd",
     "enabled": false
+  },
+  "theme": {
+    "name": "opencode-classic"
   }
 }
